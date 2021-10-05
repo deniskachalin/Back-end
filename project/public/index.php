@@ -21,10 +21,10 @@
             <a class="nav-link active" aria-current="page" href="/">Главная</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="shooter">Шутеры</a>
+            <a class="nav-link" href="/doom-2016">Doom</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="rgp">РПГ</a>
+            <a class="nav-link" href="/persona-2">Persona 2</a>
             </li>
             <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -33,29 +33,17 @@
         </div>
     </div>
     </nav>
-    <!-- <div class="container">
-        <?php if ($_SERVER["REQUEST_URI"] == "/") { ?>
-            Вы на главной странице! =)
-        <?php } elseif ($_SERVER["REQUEST_URI"] == "/shooter") { ?>
-            Тут мы вам расскажем о Шутерах
-        <?php } elseif ($_SERVER["REQUEST_URI"] == "/rgp") { ?>
-            Будешь отыгрывать роли? Тогда тебе сюда!
-        <?php } ?>
-    </div> -->
 
     <div class="container">
         <?php 
         $url = $_SERVER["REQUEST_URI"];
 
-        echo "Вы на странице: $url, будьте внимательны!<br>"; // вместо url подставится значение $url
-
         if ($url == "/") {
-            echo "Вы на главной странице! =)<br>";
-            echo "<b>И разметку могу принтовать</b>";
-        } elseif ($url == "/shooter") {
-            echo "Тут мы вам расскажем о Шутерах";
-        } elseif ($url == "/rgp") {
-            echo " Будешь отыгрывать роли? Тогда тебе сюда!";
+            require "../views/main.php";
+        } elseif ($url == "/doom-2016") {
+            require "../views/doom.php";
+        } elseif ($url == "/persona-2") {
+            require "../views/persona2.php";
         } 
         ?>
     </div>
