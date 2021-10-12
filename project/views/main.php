@@ -1,16 +1,15 @@
-<?php>
 
-<?>
+<?php ?>
 
 <ul class="list-group">
   <li class="list-group-item">
-       <button type="button" class="btn btn-primary">Doom 2016</button> 
-       <button type="button" class="btn btn-link">Картинка</button>
-       <button type="button" class="btn btn-link">Описание</button>
+       <a type="button" class="btn btn-primary" href="/doom-2016">Doom 2016</a> 
+       <a type="button" class="btn btn-link" href="/doom-2016/image">Картинка</a>
+       <a type="button" class="btn btn-link" href="/doom-2016/info">Описание</a>
     </li>
   <li class="list-group-item"> 
-    <button type="button" class="btn btn-primary">Persona 2</button> 
-    <button type="button" class="btn btn-link">Картинка</button>
-    <button type="button" class="btn btn-link">Описание</button>
+    <a type="button" class="btn btn-primary" href="/persona-2">Persona 2</a> 
+    <a type="button" class="btn btn-link" href="/persona-2/image"> Картинка</a>
+    <a type="button" class="btn btn-link" href="/persona-2/info">Описание</a>
 </li>
 </ul>

@@ -26,9 +26,6 @@
             <li class="nav-item">
             <a class="nav-link" href="/persona-2">Persona 2</a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
         </ul>
         </div>
     </div>
@@ -40,9 +37,9 @@
 
         if ($url == "/") {
             require "../views/main.php";
-        } elseif ($url == "/doom-2016") {
+        } elseif (preg_match("#^/doom-2016#", $url)) {
             require "../views/doom.php";
-        } elseif ($url == "/persona-2") {
+        } elseif (preg_match("#^/persona-2#", $url)) {
             require "../views/persona2.php";
         } 
         ?>
