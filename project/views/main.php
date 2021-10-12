@@ -1,6 +1,6 @@
+{% extends "___layout.twig" %}
 
-<?php ?>
-
+{% block content %}
 <ul class="list-group">
   <li class="list-group-item">
        <a type="button" class="btn btn-primary" href="/doom-2016">Doom 2016</a> 
@@ -13,3 +13,6 @@
     <a type="button" class="btn btn-link" href="/persona-2/info">Описание</a>
 </li>
 </ul>
+{% endblock %}
+
+

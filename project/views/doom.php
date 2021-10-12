@@ -1,3 +1,6 @@
+{% extends "___layout.twig" %}
+
+{% block content %}
 <div class="m-2">
 Тут мы вам расскажем о Doom 2016<br>
 </div>
@@ -18,4 +21,5 @@ $is_info = preg_match("#/info$#", $url);
     <li class="list-group-item">
     Doom (стилизованное написание — DOOM) — мультиплатформенная компьютерная игра в жанре шутера от первого лица. Разработана компанией id Software совместно со студией Certain Affinity и издана Bethesda Softworks. Игра вышла на Windows, Xbox One и PlayStation 4 13 мая 2016 года. 10 ноября 2017 года состоялся релиз на Nintendo Switch.
     </li>
-    <?php } ?>
+    <?php } 
+{% endblock %}
