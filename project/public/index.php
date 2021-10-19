@@ -16,6 +16,22 @@ $template = "";
 $is_image = false;
 $is_info = false;
 
+$context = [];
+$menu = [
+    [
+        "title" => "Главная",
+        "url" => "/",
+    ],
+    [
+        "title" => "Doom 2016",
+        "url" => "/doom-2016",
+    ],
+    [
+        "title" => "Persona 2",
+        "url" => "/persona-2",
+    ],
+];
+
 if ($url == "/") {
     $title = "Главная";
     $template = "main.twig";
@@ -36,6 +52,7 @@ if ($url == "/") {
 
 
 $context['title'] = $title;
+$context['menu'] = $menu;
 
 echo $twig->render($template, $context);
        
