@@ -1,6 +1,6 @@
 <?php
 require_once '../vendor/autoload.php';
-
+require_once "../controllers/MainController.php";
 // создаем загрузчик шаблонов, и указываем папку с шаблонами
 // \Twig\Loader\FilesystemLoader -- это типа как в C# писать Twig.Loader.FilesystemLoader, 
 // только слеш вместо точек
@@ -17,6 +17,7 @@ $is_image = false;
 $is_info = false;
 
 $context = [];
+$controller = null;
 $nav = [
     [
         "title" => "Главная",
@@ -48,8 +49,7 @@ $menu = [
 ];
 
 if ($url == "/") {
-    $title = "Главная";
-    $template = "main.twig";
+    $controller = new MainController($twig); // создаем экземпляр контроллера для главной страницы
 } elseif (preg_match("#/doom-2016#", $url)) {
     $title = "Doom 2016";
     $template = "__object.twig";
@@ -82,8 +82,11 @@ if ($url == "/") {
 
 
 
-$context['title'] = $title;
+/*$context['title'] = $title; */
 $context['nav'] = $nav;
 $context['menu'] = $menu;
 
-echo $twig->render($template, $context);
+// echo $twig->render($template, $context);
+if ($controller) {
+    $controller->get();
+}
