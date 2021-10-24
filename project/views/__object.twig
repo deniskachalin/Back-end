@@ -1,11 +1,13 @@
 {% extends "__layout.twig" %}
 
 {% block content %}
-    <div>
-        {{title}} -- sdfskdufhsk
-    </div>
+	<div>
+		<h2>{{title}}</h2>
+	</div>
+    <a type="button" class="btn m-2 {{is_image ? 'btn-primary'}}" href="{{image_url}}">Картинка</a>
+	<a type="button" class="btn m-2 {{is_info ? 'btn-primary'}}" href="{{info_url}}">Описание</a>
+	<br>
 
-    {% block objectContent %}
+	{% block objectContent %}{% endblock %}
 
-    {% endblock %}
 {% endblock %}
