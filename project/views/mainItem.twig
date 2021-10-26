@@ -1,0 +1,7 @@
+{% import "macro.twig" as macros %}
+<li class="list-group-item">
+    {{ macros.btnNav( item.title, item.url, true  ) }}
+    {{ macros.btnNav( "Картинка", item.url, title == item.title ) }}
+    {{ macros.btnNav( "Описание", item.url, title == item.title ) }}
+
+  </li>

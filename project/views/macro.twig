@@ -1,0 +1,12 @@
+
+{% macro btn(text, url, is_active) %}
+        <a class="{{is_active ? "btn-primary" : "btn-link" }}" href="{{url}}">{{text}}</a>
+{% endmacro %}
+
+{% macro btnNav(text, url, is_active) %}
+        <a class="btn {{is_active ? "btn-primary" : "btn-link" }}" href="{{url}}">{{text}}</a>
+{% endmacro %}
+
+{% macro btnMenu(text, url, is_active) %}
+        <a class="btn m-2 {{is_active ? "btn-primary" : "btn-link" }}" href="{{url}}">{{text}}</a>
+{% endmacro %}

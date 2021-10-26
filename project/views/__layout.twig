@@ -1,3 +1,4 @@
+{% import "macro.twig" as macros %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -15,6 +16,7 @@
 
 	</head>
 	<body>
+		
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
 				<a class="navbar-brand" href="#">
@@ -23,11 +25,12 @@
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
+				
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item">
 							{% for item in nav %}
-								<a class="{{ title == item.title ? 'active' }}" aria-current="page" href="{{item.url}}">{{item.title}}</a>
+								{{ macros.btn( item.title, item.url, title == item.title ) }}
 							{% endfor %}
 						</li>
 					</ul>
@@ -36,6 +39,6 @@
 		</nav>
 		<div class="container"> {% block content %}{% endblock %}
 			</div>
-
+			
 		</body>
 	</html>
