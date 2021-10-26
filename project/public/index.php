@@ -1,12 +1,16 @@
 <?php
 require_once '../vendor/autoload.php';
 require_once "../controllers/MainController.php";
-// создаем загрузчик шаблонов, и указываем папку с шаблонами
-// \Twig\Loader\FilesystemLoader -- это типа как в C# писать Twig.Loader.FilesystemLoader, 
-// только слеш вместо точек
+require_once "../controllers/DoomController.php";
+require_once "../controllers/DoomImageController.php";
+require_once "../controllers/DoomInfoController.php";
+require_once "../controllers/Persona2Controller.php";
+require_once "../controllers/Persona2ImageController.php";
+require_once "../controllers/Persona2InfoController.php";
+require_once "../controllers/Controller404.php";
+
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 
-// создаем собственно экземпляр Twig с помощью которого будет рендерить
 $twig = new \Twig\Environment($loader);
 
 $url = $_SERVER["REQUEST_URI"];
@@ -17,76 +21,30 @@ $is_image = false;
 $is_info = false;
 
 $context = [];
-$controller = null;
-$nav = [
-    [
-        "title" => "Главная",
-        "url" => "/",
-    ],
-    [
-        "title" => "Doom 2016",
-        "url" => "/doom-2016",
-    ],
-    [
-        "title" => "Persona 2",
-        "url" => "/persona-2",
-    ],
-];
-
-$menu = [
-    [
-        "title" => "Doom 2016",
-        "url" => "/doom-2016",
-        "img_url" => "/doom-2016/image",
-        "info_url" => "/doom-2016/image",
-    ],
-    [
-        "title" => "Persona 2",
-        "url" => "/persona-2",
-        "img_url" => "/persona-2/image",
-        "info_url" => "/persona-2/image",
-    ],
-];
+$controller = new Controller404($twig);
 
 if ($url == "/") {
-    $controller = new MainController($twig); // создаем экземпляр контроллера для главной страницы
+    $controller = new MainController($twig); 
+}elseif (preg_match("#^/doom-2016/info#", $url)){
+    $controller = new DoomInfoController($twig);
+
+}elseif (preg_match("#^/doom-2016/image#", $url)){
+    $controller = new DoomImageController($twig);
+
 } elseif (preg_match("#/doom-2016#", $url)) {
-    $title = "Doom 2016";
-    $template = "__object.twig";
-    $context['image_url'] = "/doom-2016/image";  
-    $context['info_url'] = "/doom-2016/info";  
-    if (preg_match("#^/doom-2016/image#", $url)){
-        $template = "image.twig";
-        $context['is_image'] = $url == "/doom-2016/image";
-         $context['image'] = "/images/doom-2016.jpg";
-    }elseif (preg_match("#^/doom-2016/info#", $url)){
-        $template = "doom.twig";
-        $context['is_info'] = $url == "/doom-2016/info";
-    }
+    $controller = new DoomController($twig);
+
+ }elseif (preg_match("#^/persona-2/info#", $url)){
+     $controller = new Persona2InfoController($twig);
+
+}elseif (preg_match("#^/persona-2/image#", $url)){
+    $controller = new Persona2ImageController($twig);
+
 } elseif (preg_match("#/persona-2#", $url)) {
-    $title = "Persona 2";
-    $template = "__object.twig";
-    $context['image_url'] = "/persona-2/image";  
-    $context['info_url'] = "/persona-2/info";  
-    if (preg_match("#^/persona-2/image#", $url)){
-        $template = "image.twig";
-        $context['is_image'] = $url == "/persona-2/image";
-        $context['image'] = "/images/persona-2.jpg";
-    }elseif (preg_match("#^/persona-2/info#", $url)){
-        $template = "persona2.twig";
-        $context['is_info'] = $url == "/persona-2/info";
-    }
-    
-    
-}
+    $controller = new Persona2Controller($twig);
 
+ }
 
-
-/*$context['title'] = $title; */
-$context['nav'] = $nav;
-$context['menu'] = $menu;
-
-// echo $twig->render($template, $context);
 if ($controller) {
     $controller->get();
 }

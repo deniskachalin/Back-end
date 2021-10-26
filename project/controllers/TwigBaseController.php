@@ -1,33 +1,61 @@
 <?php
-require_once "BaseController.php"; // обязательно импортим BaseController
+require_once "BaseController.php"; 
 
 class TwigBaseController extends BaseController {
-    public $title = ""; // название страницы
-    public $template = ""; // шаблон страницы
-    protected \Twig\Environment $twig; // ссылка на экземпляр twig, для рендернига
+    public $title = ""; 
+    public $template = "";
+
+    /**
+    * @var \Twig\Environment 
+    */
+    protected $twig; 
     
-    // теперь пишем конструктор, 
-    // передаем в него один параметр
-    // собственно ссылка на экземпляр twig
-    // это кстати Dependency Injection называется
-    // это лучше чем создавать глобальный объект $twig 
-    // и быстрее чем создавать персональный $twig обработчик для каждого класс 
+
     public function __construct($twig)
     {
-        $this->twig = $twig; // пробрасываем его внутрь
+        $this->twig = $twig; 
     }
     
-    // переопределяем функцию контекста
+
     public function getContext() : array
     {
-        $context = parent::getContext(); // вызываем родительский метод
-        $context['title'] = $this->title; // добавляем title в контекст
+        $context = parent::getContext(); 
+        $context['title'] = $this->title; 
+        $menu = [
+            [
+                "title" => "Doom 2016",
+                "url" => "/doom-2016",
+                "img_url" => "/doom-2016/image",
+                "info_url" => "/doom-2016/info",
+            ],
+            [
+                "title" => "Persona 2",
+                "url" => "/persona-2",
+                "img_url" => "/persona-2/image",
+                "info_url" => "/persona-2/info",
+            ],
+        ];
+        $nav = [
+            [
+                "title" => "Главная",
+                "url" => "/",
+            ],
+            [
+                "title" => "Doom 2016",
+                "url" => "/doom-2016",
+            ],
+            [
+                "title" => "Persona 2",
+                "url" => "/persona-2",
+            ],
+        ];
+    $context['menu'] = $menu;
+    $context['nav'] = $nav;
 
         return $context;
     }
     
-    // функция гет, рендерит результат используя $template в качестве шаблона
-    // и вызывает функцию getContext для формирования словаря контекста
+
     public function get() {
         echo $this->twig->render($this->template, $this->getContext());
     }
