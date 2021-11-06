@@ -1,14 +1,7 @@
-
 {% extends "__layout.twig" %}
 
 {% block content %}
-<pre>
-  {{ dump(games) }} 
-  </pre>
-	<ul class="list-group">
-    {% for item in menu %}
-      {% include "mainItem.twig" %}
-    {% endfor %}
-	</ul>
-{% endblock %}
-  
+<ul class="list-groop d-flex">
+  {% for item in games %}
+  {% include "mainItem.twig" %}
+  {% endfor %}</ul>{% endblock %}

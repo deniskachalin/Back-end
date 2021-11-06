@@ -10,8 +10,7 @@ class MainController extends TwigBaseController {
     {
         $context = parent::getContext();
         
-        
-        $query = $this->pdo->query("SELECT * FROM video_games");
+        $query = $this->pdo->query("SELECT * FROM games");
         
         $context['games'] = $query->fetchAll();
 

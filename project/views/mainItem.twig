@@ -1,7 +1,12 @@
 {% import "macro.twig" as macros %}
-<li class="list-group-item">
-    {{ macros.btnNav( item.title, item.url, true  ) }}
-    {{ macros.btnNav( "Картинка", item.url, title == item.title ) }}
-    {{ macros.btnNav( "Описание", item.url, title == item.title ) }}
-
-  </li>
+<li class="list-group-item" style="text-align: center;">
+    {{ macros.image( item.image, item.title) }} 
+    <div class="d-flex btn-group-vertical">
+      {{ macros.btnNav( item.title, item.url, true  ) }}
+    </div>
+    <div class="d-flex">
+      {{ macros.btnNav( "Картинка", item.url, title == item.title ) }}
+      {{ macros.btnNav( "Описание", item.url, title == item.title ) }}
+    </div>
+    
+  </li> 

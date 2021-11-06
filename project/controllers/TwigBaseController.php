@@ -21,6 +21,7 @@ class TwigBaseController extends BaseController {
     {
         $context = parent::getContext(); 
         $context['title'] = $this->title; 
+
         $menu = [
             [
                 "title" => "Doom 2016",

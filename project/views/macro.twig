@@ -4,9 +4,13 @@
 {% endmacro %}
 
 {% macro btnNav(text, url, is_active) %}
-        <a class="btn {{is_active ? "btn-primary" : "btn-link" }}" href="{{url}}">{{text}}</a>
+        <a class="btn {{is_active ? "btn-primary" : "btn-link" }}" href="{{url}}" >{{text}}</a>
 {% endmacro %}
 
 {% macro btnMenu(text, url, is_active) %}
-        <a class="btn m-2 {{is_active ? "btn-primary" : "btn-link" }}" href="{{url}}">{{text}}</a>
+        <a class="btn m-2 {{is_active ? "btn-primary" : "btn-link" }}" href="{{url}}" >{{text}}</a>
+{% endmacro %}
+
+{% macro image(url, alt) %}
+        <img src="{{url}}" alt="{{alt}}" class="figure-img img-fluid rounded" style="max-width: 180px; min-width: 180px" >
 {% endmacro %}
