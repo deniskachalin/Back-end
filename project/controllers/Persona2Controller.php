@@ -1,5 +1,5 @@
 <?php
-require_once "TwigBaseController.php"; 
+// require_once "TwigBaseController.php"; 
 
 class Persona2Controller extends TwigBaseController {
     public $title = "Persona 2"; 

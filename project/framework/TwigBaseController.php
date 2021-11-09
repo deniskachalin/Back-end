@@ -1,26 +1,30 @@
 <?php
-require_once "BaseController.php"; 
+require_once "BaseController.php";
 
-class TwigBaseController extends BaseController {
-    public $title = ""; 
+class TwigBaseController extends BaseController
+{
+    public $title = "";
     public $template = "";
 
-    /**
-    * @var \Twig\Environment 
-    */
-    protected $twig; 
-    
 
-    public function __construct($twig)
+
+    protected \Twig\Environment $twig;
+
+    // public function __construct($twig)
+    // {
+    //     $this->twig = $twig; 
+    // }
+
+    public function setTwig($twig)
     {
-        $this->twig = $twig; 
+        $this->twig = $twig;
     }
-    
 
-    public function getContext() : array
+
+    public function getContext(): array
     {
-        $context = parent::getContext(); 
-        $context['title'] = $this->title; 
+        $context = parent::getContext();
+        $context['title'] = $this->title;
 
         $menu = [
             [
@@ -50,14 +54,15 @@ class TwigBaseController extends BaseController {
                 "url" => "/persona-2",
             ],
         ];
-    $context['menu'] = $menu;
-    $context['nav'] = $nav;
+        $context['menu'] = $menu;
+        $context['nav'] = $nav;
 
         return $context;
     }
-    
 
-    public function get() {
+
+    public function get()
+    {
         echo $this->twig->render($this->template, $this->getContext());
     }
 }

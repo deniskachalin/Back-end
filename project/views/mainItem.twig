@@ -1,12 +1,13 @@
 {% import "macro.twig" as macros %}
+{% set url = "/games/"~ item.id %}
 <li class="list-group-item m-2" style="text-align: center; width: 220px;">
     {{ macros.image( item.image, item.title) }} 
     <div class="d-flex btn-group-vertical">
-      {{ macros.btnNav( item.title, item.url, true  ) }}
+      {{ macros.btnNav( item.title, url, true  ) }}
     </div>
     <div class="d-flex justify-content-center">
-      {{ macros.btnNav( "Картинка", item.url, title == item.title ) }}
-      {{ macros.btnNav( "Описание", item.url, title == item.title ) }}
+      {{ macros.btnNav( "Картинка", url, title == item.title ) }}
+      {{ macros.btnNav( "Описание", url, title == item.title ) }}
     </div>
     
   </li> 

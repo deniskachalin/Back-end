@@ -1,5 +1,6 @@
 <?php
 require_once '../vendor/autoload.php';
+require_once '../framework/autoload.php';
 require_once "../controllers/MainController.php";
 require_once "../controllers/DoomController.php";
 require_once "../controllers/DoomImageController.php";
@@ -8,6 +9,7 @@ require_once "../controllers/Persona2Controller.php";
 require_once "../controllers/Persona2ImageController.php";
 require_once "../controllers/Persona2InfoController.php";
 require_once "../controllers/Controller404.php";
+require_once "../controllers/ObjectController.php"; 
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 
@@ -16,7 +18,7 @@ $twig = new \Twig\Environment($loader, [
 ]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
-$url = $_SERVER["REQUEST_URI"];
+// $url = $_SERVER["REQUEST_URI"];
 
 $title = "";
 $template = "";
@@ -24,33 +26,41 @@ $is_image = false;
 $is_info = false;
 
 $context = [];
-$controller = new Controller404($twig);
+// $controller = new Controller404($twig);
 
 $pdo = new PDO("mysql:host=localhost;dbname=video_games;charset=utf8", "root", "");
 
-if ($url == "/") {
-    $controller = new MainController($twig); 
-}elseif (preg_match("#^/doom-2016/info#", $url)){
-    $controller = new DoomInfoController($twig);
+$router = new Router($twig, $pdo);
+$router->add("/", MainController::class);
+$router->add("/doom-2016", DoomController::class);
+$router->add("/games/(?P<id>\d+)", ObjectController::class); 
 
-}elseif (preg_match("#^/doom-2016/image#", $url)){
-    $controller = new DoomImageController($twig);
+$router->get_or_default(Controller404::class);
 
-} elseif (preg_match("#/doom-2016#", $url)) {
-    $controller = new DoomController($twig);
+// if ($url == "/") {
+//     $controller = new MainController($twig); 
+// }
+// }elseif (preg_match("#^/doom-2016/info#", $url)){
+//     $controller = new DoomInfoController($twig);
 
- }elseif (preg_match("#^/persona-2/info#", $url)){
-     $controller = new Persona2InfoController($twig);
+// }elseif (preg_match("#^/doom-2016/image#", $url)){
+//     $controller = new DoomImageController($twig);
 
-}elseif (preg_match("#^/persona-2/image#", $url)){
-    $controller = new Persona2ImageController($twig);
+// } elseif (preg_match("#/doom-2016#", $url)) {
+//     $controller = new DoomController($twig);
 
-} elseif (preg_match("#/persona-2#", $url)) {
-    $controller = new Persona2Controller($twig);
+//  }elseif (preg_match("#^/persona-2/info#", $url)){
+//      $controller = new Persona2InfoController($twig);
 
- }
+// }elseif (preg_match("#^/persona-2/image#", $url)){
+//     $controller = new Persona2ImageController($twig);
 
-if ($controller) {
-    $controller->setPDO($pdo);
-    $controller->get();
-}
+// } elseif (preg_match("#/persona-2#", $url)) {
+//     $controller = new Persona2Controller($twig);
+
+//  }
+
+// if ($controller) {
+//     $controller->setPDO($pdo);
+//     $controller->get();
+// }
