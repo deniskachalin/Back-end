@@ -2,3 +2,4 @@
 /phpunit.xml
 /vendor
 .phpunit.result.cache
+/public/images/media

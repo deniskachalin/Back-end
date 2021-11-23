@@ -5,6 +5,7 @@ require_once "../controllers/MainController.php";
 require_once "../controllers/Controller404.php";
 require_once "../controllers/ObjectController.php"; 
 require_once "../controllers/SearchController.php"; 
+require_once "../controllers/GamesCreateController.php"; 
 
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
@@ -36,6 +37,7 @@ $router->add("/", MainController::class);
 $router->add("/doom-2016", DoomController::class);
 $router->add("/games/(?P<id>\d+)", ObjectController::class); 
 $router->add("/search", SearchController::class);
+$router->add("/games/create", GamesCreateController::class);
 
 $router->get_or_default(Controller404::class);
 

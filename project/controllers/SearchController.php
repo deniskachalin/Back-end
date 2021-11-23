@@ -4,6 +4,7 @@ require_once "BaseGamesTwigController.php";
 
 class SearchController extends BaseGamesTwigController{
     public $template = "search.twig";
+    public $title = "Поиск";
 
     public function getContext(): array
     {
