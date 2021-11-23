@@ -2,14 +2,10 @@
 require_once '../vendor/autoload.php';
 require_once '../framework/autoload.php';
 require_once "../controllers/MainController.php";
-require_once "../controllers/DoomController.php";
-require_once "../controllers/DoomImageController.php";
-require_once "../controllers/DoomInfoController.php";
-require_once "../controllers/Persona2Controller.php";
-require_once "../controllers/Persona2ImageController.php";
-require_once "../controllers/Persona2InfoController.php";
 require_once "../controllers/Controller404.php";
 require_once "../controllers/ObjectController.php"; 
+require_once "../controllers/ImageController.php"; 
+require_once "../controllers/InfoController.php"; 
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 
@@ -30,10 +26,16 @@ $context = [];
 
 $pdo = new PDO("mysql:host=localhost;dbname=video_games;charset=utf8", "root", "");
 
+// $query = $pdo->query("SELECT DISTINCT type FROM games ORDER BY 1");
+// $types = $query->fetchAll();
+// $twig->addGlobal("types", $types);
+
 $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
 $router->add("/doom-2016", DoomController::class);
 $router->add("/games/(?P<id>\d+)", ObjectController::class); 
+$router->add("/games/(?P<id>\d+)/image", ImageController::class); 
+$router->add("/games/(?P<id>\d+)/info", InfoController::class); 
 
 $router->get_or_default(Controller404::class);
 

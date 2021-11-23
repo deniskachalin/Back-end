@@ -1,5 +1,6 @@
 {% import "macro.twig" as macros %}
 {% extends "__layout.twig" %}
+{% set url = "/games/"~ object.id %}
 
 {% block content %}
 	<div>
@@ -7,8 +8,8 @@
 		<p>{{object.description}}</p>
 		
 	</div>
-	{{ macros.btnMenu( "Картинка", image_url, is_image ) }}
-	{{ macros.btnMenu( "Описание", info_url, is_info ) }}
+	{{ macros.btnMenu( "Картинка", url ~"/image", is_image )}}
+	{{ macros.btnMenu( "Описание", url ~"/info", is_info )}}
     
 	<br>
 

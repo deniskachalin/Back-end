@@ -1,14 +1,14 @@
 <?php
-require_once "DoomController.php"; 
+require_once "ObjectController.php"; 
 
-class DoomInfoController extends DoomController {
-    public $template = "doom.twig";
+class ImageController extends ObjectController {
+    public $template = "image.twig";
 
     public function getContext() : array
     {
         $context = parent::getContext(); 
 
-        $context['is_info'] = $context['url'] == "/doom-2016/info";
+        $context['is_image'] = true;
         
 
         return $context;
