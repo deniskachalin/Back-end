@@ -28,11 +28,11 @@
 				
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="nav-item">
-							{% for item in nav %}
+						{% for item in nav %}
+							<li class="nav-item">
 								{{ macros.btn( item.title, item.url, title == item.title ) }}
-							{% endfor %}
-						</li>
+							</li>
+						{% endfor %}
 					</ul>
 				</div>
 			</div>

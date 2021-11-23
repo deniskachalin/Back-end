@@ -1,6 +1,7 @@
 <?php
+ require_once "BaseGamesTwigController.php"; 
 
-class ObjectController extends TwigBaseController {
+class ObjectController extends BaseGamesTwigController {
 
     public $template = "__object.twig";
     public $object;

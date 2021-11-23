@@ -1,5 +1,4 @@
 <?php
-// require_once "TwigBaseController.php";
 require_once "BaseGamesTwigController.php";
 
 class Controller404 extends BaseGamesTwigController {

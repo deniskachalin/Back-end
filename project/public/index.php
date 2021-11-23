@@ -30,6 +30,7 @@ $pdo = new PDO("mysql:host=localhost;dbname=video_games;charset=utf8", "root", "
 // $types = $query->fetchAll();
 // $twig->addGlobal("types", $types);
 
+
 $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
 $router->add("/doom-2016", DoomController::class);
