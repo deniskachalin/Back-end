@@ -4,8 +4,8 @@ require_once '../framework/autoload.php';
 require_once "../controllers/MainController.php";
 require_once "../controllers/Controller404.php";
 require_once "../controllers/ObjectController.php"; 
-require_once "../controllers/ImageController.php"; 
-require_once "../controllers/InfoController.php"; 
+require_once "../controllers/SearchController.php"; 
+
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 
@@ -25,7 +25,7 @@ $context = [];
 // $controller = new Controller404($twig);
 
 $pdo = new PDO("mysql:host=localhost;dbname=video_games;charset=utf8", "root", "");
-
+$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 // $query = $pdo->query("SELECT DISTINCT type FROM games ORDER BY 1");
 // $types = $query->fetchAll();
 // $twig->addGlobal("types", $types);
@@ -35,8 +35,7 @@ $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
 $router->add("/doom-2016", DoomController::class);
 $router->add("/games/(?P<id>\d+)", ObjectController::class); 
-$router->add("/games/(?P<id>\d+)/image", ImageController::class); 
-$router->add("/games/(?P<id>\d+)/info", InfoController::class); 
+$router->add("/search", SearchController::class);
 
 $router->get_or_default(Controller404::class);
 

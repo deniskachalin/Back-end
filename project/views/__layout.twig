@@ -28,11 +28,17 @@
 				
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						{% for item in nav %}
-							<li class="nav-item">
-								{{ macros.btn( item.title, item.url, title == item.title ) }}
+						<li class = "nav-item me-3">
+							{{ macros.btn( "Главная", "/", title == "Главная" ) }}
+						</li>
+						{% for type in types %}
+							<li class="nav-item me-3">
+								{{ macros.btn( type.type|title, "/?type="~ type.type, title == type.type ) }}
 							</li>
 						{% endfor %}
+						<li class = "nav-item me-3">
+							{{ macros.btn( "Поиск", "/search", title == "Поиск" ) }}
+						</li>
 					</ul>
 				</div>
 			</div>

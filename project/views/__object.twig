@@ -8,11 +8,15 @@
 		<p>{{object.description}}</p>
 		
 	</div>
-	{{ macros.btnMenu( "Картинка", url ~"/image", is_image )}}
-	{{ macros.btnMenu( "Описание", url ~"/info", is_info )}}
-    
-	<br>
-
-	{% block objectContent %}{% endblock %}
+	{{ macros.btnMenu( "Картинка", url ~"?show=image", is_image )}}
+	{{ macros.btnMenu( "Описание", url ~"?show=info", is_info )}}
+    <br>
+	{% if is_image %}
+		<img src="{{ object.image }}" style="width: 300px;"/>
+	{% endif %}
+	{% if is_info %}
+		<p>{{object.info}}</p>
+	{% endif %}
+	
 
 {% endblock %}

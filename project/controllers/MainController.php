@@ -9,9 +9,16 @@ class MainController extends BaseGamesTwigController {
     public function getContext(): array
     {
         $context = parent::getContext();
-        
-        $query = $this->pdo->query("SELECT * FROM games");
-        
+        if (isset($_GET['type'])){
+            $query = $this->pdo->prepare("select * from games where type = :type");
+            $query->bindValue("type", $_GET['type']);
+            $query->execute();
+            $context['title'] = $_GET['type'];
+        }
+        else {
+            $query = $this->pdo->query("SELECT * FROM games");
+        }
+                
         $context['games'] = $query->fetchAll();
 
         return $context;

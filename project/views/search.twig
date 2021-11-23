@@ -1,0 +1,40 @@
+{% extends "__layout.twig" %}
+{% import "macro.twig" as macros %}
+
+{% block content %}
+	<h1 class="mb-3">Поиск</h1>
+
+	<form action="">
+        <div class = "row g-3">
+            <label for="type" class="form-label col">Тип</label>
+            <label for="title" class="form-label col">Название</label>
+            <label for="info" class="form-label col">Описание</label>
+        </div>
+		<div class="row g-3">
+			<div class="col">
+				<select id = "type"class="form-select" name="type">
+					<option selected value="">Все</option>
+					{% for type in types %}
+						<option value="{{type.type}}">{{type.type}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="col">
+				<input id = "title" type="text" class="form-control" aria-label="Last name">
+			</div>
+			<div class="col">
+				<input id = "info" type="text" class="form-control" aria-label="Last name">
+			</div>
+
+
+		</div>
+
+
+		<button type="submit">Найти</button>
+	</form>
+	<ul>
+		{% for game in objects %}
+			<li>{{ macros.btn( game.title, "/games/"~ game.id,  false ) }}</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
