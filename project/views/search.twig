@@ -4,14 +4,14 @@
 {% block content %}
 	<h1 class="mb-3">Поиск</h1>
 
-	<form action="">
+	<form action="" class = "mb-3">
         <div class = "row g-3">
-            <label for="type" class="form-label col">Тип</label>
-            <label for="title" class="form-label col">Название</label>
-            <label for="info" class="form-label col">Описание</label>
+            <label for="type" class="form-label col-3">Тип</label>
+            <label for="title" class="form-label col-4">Название</label>
+            <label for="description" class="form-label col-4" >Описание</label>
         </div>
-		<div class="row g-3">
-			<div class="col">
+		<div class="row g-3 justify-content-between">
+			<div class="col-3">
 				<select id = "type"class="form-select" name="type">
 					<option selected value="">Все</option>
 					{% for type in types %}
@@ -19,22 +19,20 @@
 					{% endfor %}
 				</select>
 			</div>
-			<div class="col">
-				<input id = "title" type="text" class="form-control" aria-label="Last name">
+			<div class="col-4">
+				<input id = "title" type="text" class="form-control" name = "title">
 			</div>
-			<div class="col">
-				<input id = "info" type="text" class="form-control" aria-label="Last name">
+			<div class="col-4">
+				<input id = "info" type="text" class="form-control"  name = "description">
 			</div>
 
-
+            <button class="col-1 btn btn-primary" type="submit">Найти</button>
 		</div>
 
-
-		<button type="submit">Найти</button>
 	</form>
-	<ul>
+	<ul class="list-group">
 		{% for game in objects %}
-			<li>{{ macros.btn( game.title, "/games/"~ game.id,  false ) }}</li>
+        <li class="list-group-item">{{ macros.btn( game.title, "/games/"~ game.id,  false ) }}</li>
 		{% endfor %}
 	</ul>
 {% endblock %}

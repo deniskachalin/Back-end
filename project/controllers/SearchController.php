@@ -11,17 +11,18 @@ class SearchController extends BaseGamesTwigController{
 
         $type = isset($_GET['type']) ? $_GET['type'] : '';
         $title = isset($_GET['title']) ? $_GET['title'] : '';
-
+        $description = isset($_GET['description']) ? $_GET['description'] : '';
         $sql = <<<EOL
-SELECT id, title
-FROM games
-WHERE (:title = '' OR title like CONCAT('%', :title, '%'))
-    AND (type = :type)
-EOL;
-
+            SELECT id, title
+            FROM games WHERE true
+            AND (:type = '' or type = :type)
+            AND (:title = '' OR title like CONCAT('%', :title, '%'))
+            AND (:description = '' OR description like CONCAT('%', :description, '%'))
+            EOL;
         $query = $this->pdo->prepare($sql);
-        $query->bindValue("title", $title);
         $query->bindValue("type", $type);
+        $query->bindValue("title", $title);
+        $query->bindValue("description", $description);
         $query->execute();
         $context['objects'] = $query->fetchAll();
 
