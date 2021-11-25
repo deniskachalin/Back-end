@@ -6,6 +6,9 @@ require_once "../controllers/Controller404.php";
 require_once "../controllers/ObjectController.php"; 
 require_once "../controllers/SearchController.php"; 
 require_once "../controllers/GamesCreateController.php"; 
+require_once "../controllers/GamesDeleteController.php"; 
+require_once "../controllers/TypesCreateController.php"; 
+require_once "../controllers/TypeController.php"; 
 
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
@@ -34,10 +37,14 @@ $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 
 $router = new Router($twig, $pdo);
 $router->add("/", MainController::class);
-$router->add("/doom-2016", DoomController::class);
-$router->add("/games/(?P<id>\d+)", ObjectController::class); 
 $router->add("/search", SearchController::class);
+$router->add("/games/(?P<id>\d+)", ObjectController::class); 
+$router->add("/types/(?P<id>\d+)", TypeController::class);
 $router->add("/games/create", GamesCreateController::class);
+$router->add("/types/create", TypesCreateController::class);
+
+$router->add("/games/delete", GamesDeleteController::class);
+$router->add("/games/(?P<id>\d+)/edit", GamesUpdateController::class);
 
 $router->get_or_default(Controller404::class);
 

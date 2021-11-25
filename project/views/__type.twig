@@ -1,0 +1,20 @@
+{% import "macro.twig" as macros %}
+{% extends "__layout.twig" %}
+{% set url = "/types/"~ type.id %}
+
+{% block content %}
+	<div>
+		<h2>{{type.name}}</h2>		
+	</div>
+	{{ macros.btnMenu( "Картинка", url ~"?show=image", is_image )}}
+	{{ macros.btnMenu( "Описание", url ~"?show=info", is_info )}}
+    <br>
+	{% if is_image %}
+		<img src="{{ type.image }}" style="width: 300px;"/>
+	{% endif %}
+	{% if is_info %}
+		<p>{{type.description}}</p>
+	{% endif %}
+	
+
+{% endblock %}

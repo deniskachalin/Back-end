@@ -27,7 +27,7 @@ class SearchController extends BaseGamesTwigController{
         $query->execute();
         $context['objects'] = $query->fetchAll();
 
-        $query1 = $this->pdo->prepare("select DISTINCT type from games");
+        $query1 = $this->pdo->prepare("select name from types");
         $query1->execute();
         $context['types'] = $query1->fetchAll();
 

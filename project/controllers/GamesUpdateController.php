@@ -1,12 +1,24 @@
 <?php
  require_once "BaseGamesTwigController.php";
 
-class GamesCreateController extends BaseGamesTwigController {
-    public $template = "games_create.twig";
-    public $title = "Добавить игру";
+class GamesUpdateController extends BaseGamesTwigController {
+    public $template = "games_update.twig";
+    public $title = "Изменить игру";
 
     public function get(array $context){
-        parent::get($context);
+        $id = $this->params['id'];
+        $sql = <<<EOL
+        Select * from games where id = :id
+        EOL;
+        $query =$this->pdo->prepare($sql);
+        $query->bindValue("id", $id);
+        $query->execute();
+
+        $data = $query->fetch();
+
+        $context['game'] = $data;
+
+        $this->get($context);
     }
     public function post(array $context){
         $title = $_POST['title'];
@@ -20,12 +32,14 @@ class GamesCreateController extends BaseGamesTwigController {
         $image_url = "/media/$name";
 
         $sql = <<<EOL
-        insert into games(title, description, type, info, image) 
-        values (:title, :description, :type, :info, :image_url)
+        update games
+        set title = :title, description = :description, type = :type, info = :info, image =:image
+        where id = :id
         EOL;
 
         $query = $this->pdo->prepare($sql);
 
+        $query->bindValue("id", $this->params['id']);
         $query->bindValue("title", $title);
         $query->bindValue("description", $description);
         $query->bindValue("type", $type);
@@ -34,7 +48,7 @@ class GamesCreateController extends BaseGamesTwigController {
 
         $query->execute();
 
-        $context['message'] = 'Вы успешно создали игру';
+        $context['message'] = 'Вы успешно изменили игру';
         $context['id'] = $this->pdo->lastInsertId();
         $this->get($context);
     }

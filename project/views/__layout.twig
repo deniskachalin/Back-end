@@ -33,14 +33,17 @@
 						</li>
 						{% for type in types %}
 							<li class="nav-item me-3">
-								{{ macros.btn( type.type|title, "/?type="~ type.type, title == type.type ) }}
+								{{ macros.btn( type.name|title, "/?type="~ type.name, title == type.name ) }}
 							</li>
 						{% endfor %}
 						<li class = "nav-item me-3">
 							{{ macros.btn( "Поиск", "/search", title == "Поиск" ) }}
 						</li>
 						<li class = "nav-item me-3">
-							{{ macros.btn( "Добавить", "/games/create", title == "Добавить" ) }}
+							{{ macros.btn( "Добавить игру", "/games/create", title == "Добавить игру" ) }}
+						</li>
+						<li class = "nav-item me-3">
+							{{ macros.btn( "Добавить тип", "/types/create", title == "Добавить тип" ) }}
 						</li>
 					</ul>
 				</div>

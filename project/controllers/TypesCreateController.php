@@ -1,18 +1,17 @@
 <?php
  require_once "BaseGamesTwigController.php";
 
-class GamesCreateController extends BaseGamesTwigController {
-    public $template = "games_create.twig";
-    public $title = "Добавить игру";
+ class TypesCreateController extends BaseGamesTwigController{
+    public $template = "types_create.twig";
+    public $title = "Добавление жанра";
 
     public function get(array $context){
         parent::get($context);
     }
+
     public function post(array $context){
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $type = $_POST['type'];
-        $info = $_POST['info'];
+        $typeName = $_POST['name'];
+        $description = $_POST['info'];
 
         $tmp_name = $_FILES['image']['tmp_name'];
         $name = $_FILES['image']['name'];
@@ -20,16 +19,14 @@ class GamesCreateController extends BaseGamesTwigController {
         $image_url = "/media/$name";
 
         $sql = <<<EOL
-        insert into games(title, description, type, info, image) 
-        values (:title, :description, :type, :info, :image_url)
+        insert into types(name, description, image) 
+        values (:name, :description, :image_url)
         EOL;
 
         $query = $this->pdo->prepare($sql);
 
-        $query->bindValue("title", $title);
+        $query->bindValue("name", $typeName);
         $query->bindValue("description", $description);
-        $query->bindValue("type", $type);
-        $query->bindValue("info", $info);
         $query->bindValue("image_url", $image_url);
 
         $query->execute();
@@ -48,4 +45,4 @@ class GamesCreateController extends BaseGamesTwigController {
 
         return $context;
     }
-}
+ }
