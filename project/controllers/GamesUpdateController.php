@@ -17,10 +17,11 @@ class GamesUpdateController extends BaseGamesTwigController {
         $data = $query->fetch();
 
         $context['game'] = $data;
-
-        $this->get($context);
+        parent::get($context);
+        
     }
     public function post(array $context){
+        $id = $this->params['id'];
         $title = $_POST['title'];
         $description = $_POST['description'];
         $type = $_POST['type'];
@@ -33,23 +34,26 @@ class GamesUpdateController extends BaseGamesTwigController {
 
         $sql = <<<EOL
         update games
-        set title = :title, description = :description, type = :type, info = :info, image =:image
+        set title = :title,
+        description = :description,
+        type = :type,
+        info = :info,
+        image =:image
         where id = :id
         EOL;
 
         $query = $this->pdo->prepare($sql);
 
-        $query->bindValue("id", $this->params['id']);
         $query->bindValue("title", $title);
         $query->bindValue("description", $description);
         $query->bindValue("type", $type);
         $query->bindValue("info", $info);
-        $query->bindValue("image_url", $image_url);
-
+        $query->bindValue("image", $image_url);
+        $query->bindValue("id", $id);
         $query->execute();
 
         $context['message'] = 'Вы успешно изменили игру';
-        $context['id'] = $this->pdo->lastInsertId();
+        $context['id'] = $id;
         $this->get($context);
     }
 
@@ -59,7 +63,6 @@ class GamesUpdateController extends BaseGamesTwigController {
         $query1->execute();
         $context['types'] = $query1->fetchAll();
         $context['title'] = $this->title;
-
         return $context;
     }
 }

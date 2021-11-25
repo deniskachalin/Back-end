@@ -7,6 +7,7 @@ require_once "../controllers/ObjectController.php";
 require_once "../controllers/SearchController.php"; 
 require_once "../controllers/GamesCreateController.php"; 
 require_once "../controllers/GamesDeleteController.php"; 
+require_once "../controllers/GamesUpdateController.php"; 
 require_once "../controllers/TypesCreateController.php"; 
 require_once "../controllers/TypeController.php"; 
 

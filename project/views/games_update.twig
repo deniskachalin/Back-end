@@ -1,0 +1,42 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+	<h1>Изменение игры</h1>
+	<hr>
+
+	{% if message %}
+		<div class="alert alert-info">
+			{{message}}
+			<a href="/games/{{id}}">Открыть игру</a>
+		</div>
+	{% endif %}
+
+	<form action="" enctype="multipart/form-data" class="row g-3" method="POST">
+		<div class="col-4">
+			<label class="form-label">Название</label>
+			<input type="text" class="form-control" name="title" value="{{game.title}}">
+		</div>
+		<div class="col-4">
+			<label class="form-label">Краткое описание</label>
+			<input type="text" class="form-control" name="description" value="{{game.description}}">
+		</div>
+		<div class="col-4">
+			<label class="form-label">Жанр</label>
+			<select name="type" class="form-control">
+				{% for type in types %}
+					<option value="{{type.name}}" {% if game.type == type.name %} selected {% endif %}>{{type.name}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="col-12">
+			<div class="mb-3">
+				<label class="form-label">Картинка</label>
+				<input class="form-control" type="file" name="image">
+			</div>
+			<textarea name="info" rows="5" placeholder="Полное описание..." class="form-control">{{game.info}}</textarea>
+		</div>
+		<div class="col-12 text-end">
+			<button type="submit" class="btn btn-primary">Добавить</button>
+		</div>
+	</form>
+{% endblock %}
